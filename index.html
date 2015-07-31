@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Firebase does not need Angular</title>
+	<script src="https://cdn.firebase.com/js/client/2.2.9/firebase.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+</head>
+<body>
+	<form action="">
+		<select name="user_name" id="">
+			<option value="0">user1</option>
+			<option value="1">user2</option>
+		</select>
+		<input type="submit" value="See user details">
+	</form>
+
+	<b>bio</b>
+	<p></p>
+
+	<script>
+		var db = new Firebase('https://glaring-inferno-9380.firebaseio.com/'),
+		users = db.child('users'), orders = db.child('orders');
+
+		$('form').submit(function(e) {
+			e.preventDefault()
+			var sel = $('select').val()
+			users.child(sel).once('value',function(e) {
+				var user = e.val()
+				$('p').html(user.bio)
+
+				orders.child()
+			});
+		})
+
+	</script>
+</body>
+</html>
